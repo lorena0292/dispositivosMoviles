@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">clinicapets</string>
+    <string name="description">clinicapets</string>
+
+    <string name="opcion1">Perros de raza mini y toy</string>
+    <string name="opcion2">Perros de raza pequeña</string>
+    <string name="opcion3">Perros de raza mediana</string>
+    <string name="opcion4">Perros de raza grandes</string>
+    <string name="opcion5">Perros de raza gigantes</string>
+
+</resources>
