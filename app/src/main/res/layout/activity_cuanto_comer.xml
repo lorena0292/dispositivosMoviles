@@ -5,7 +5,36 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".cuantoComer">
+
+    <LinearLayout
+        android:id="@+id/cabeceraComer"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        tools:ignore="MissingConstraints">
+    <ImageView
+        android:id="@+id/imgAnimalSelected"
+        android:tag="@+id/imgAnimalSelected"
+        android:layout_gravity="center|end"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/cat"
+        android:tint="@color/blue"
+        android:padding="10dp"
+        tools:ignore="UseAppTint"
+        />
+
+        <TextView
+            android:id="@+id/txtAnimalSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/strComerGato"
+            app:layout_constraintStart_toEndOf="@id/imgAnimalSelected"
+            app:layout_constraintTop_toBottomOf="@id/imgAnimalSelected" />
+    </LinearLayout>
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/formulario"
@@ -15,9 +44,8 @@
 
         android:orientation="vertical"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btnCalular"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toTopOf="@id/btnCalcular"
+        app:layout_constraintEnd_toEndOf="parent">
 
 
         <TextView
@@ -41,13 +69,39 @@
             tools:layout_editor_absoluteY="64dp" />
 
         <TextView
+            android:id="@+id/textErrorNombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strErrorNombre"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="496dp"
+            android:visibility="gone"
+
+            />
+
+
+
+        <TextView
             android:id="@+id/textEdad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edad"
+            android:text="@string/strEdad"
             android:textSize="30sp"
             tools:layout_editor_absoluteX="106dp"
             tools:layout_editor_absoluteY="496dp" />
+
+        <TextView
+            android:id="@+id/textErrorEdad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strErrorEdad"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="496dp"
+            android:visibility="gone" />
 
 
         <com.google.android.material.slider.RangeSlider
@@ -55,9 +109,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stepSize="1"
-            android:valueFrom="2"
-            android:valueTo="6" />
+            android:valueFrom="0"
+            android:valueTo="15" />
 
+        <TextView
+            android:id="@+id/textTamaño"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strTamanyo"
+            android:textSize="30sp"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="496dp" />
+
+        <TextView
+            android:id="@+id/textErrorTamaño"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strErrorTamanyo"
+            android:textSize="20sp"
+            android:textColor="@color/red"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="496dp"
+            android:visibility="gone" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -66,51 +139,43 @@
             android:checkedButton="@+id/radio_button_1">
 
             <RadioButton
-                android:id="@+id/radio_button_1"
+                android:id="@+id/rbMini"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="@string/opcion1"
+                android:text="@string/strPerroMini"
                 android:textSize="28sp" />
 
             <RadioButton
-                android:id="@+id/radio_button_2"
+                android:id="@+id/rbPequenyo"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="@string/opcion2"
+                android:text="@string/strPerroPequenyo"
                 android:textSize="28sp" />
 
             <RadioButton
-                android:id="@+id/radio_button_3"
+                android:id="@+id/rbMediano"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="@string/opcion3"
+                android:text="@string/strPerroMediano"
                 android:textSize="28sp" />
 
             <RadioButton
-                android:id="@+id/radio_button_4"
+                android:id="@+id/rbGrande"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
-                android:text="@string/opcion4"
+                android:text="@string/strPerroGrande"
                 android:textSize="28sp" />
 
-            <RadioButton
-                android:id="@+id/radio_button4"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:enabled="false"
-                android:text="@string/opcion5"
-                android:textSize="28sp" />
         </RadioGroup>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-
     <Button
-        android:id="@+id/btnCalular"
+        android:id="@+id/btnCalcular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:text="@string/strBtnComer"
         tools:layout_editor_absoluteX="147dp"
         tools:layout_editor_absoluteY="358dp"
         app:layout_constraintBottom_toBottomOf="parent"

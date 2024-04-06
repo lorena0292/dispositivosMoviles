@@ -4,20 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.clinicapets.models.PetResponseItem
 import com.example.clinicapets.adapters.PetsAdapter
-import com.example.clinicapets.models.Pet
-import com.example.clinicapets.models.SpeciePets
 import com.example.clinicapets.service.RetrofitServiceFactory
 import kotlinx.coroutines.launch
 
@@ -31,11 +31,16 @@ class MainActivity : AppCompatActivity() {
        )*/
 
     //Splash time
-    private var splashScreenStays :Boolean = true;
-    private val DELAY:Long = 1500L;
+    private var splashScreenStays :Boolean = true
+    private val DELAY:Long = 1500L
 
     private lateinit var btnComer: Button
     private lateinit var btnEdad: Button
+    private lateinit var dog:ImageView
+    private lateinit var cat:ImageView
+    private lateinit var animalSelected: String
+    private lateinit var txtNoSelected:TextView
+
 
 
     //Recycler pets
@@ -58,12 +63,14 @@ class MainActivity : AppCompatActivity() {
         screenSplash.setKeepOnScreenCondition{splashScreenStays}
         Handler(Looper.getMainLooper()).postDelayed({ splashScreenStays = false }, DELAY)
 
+        //Inicializamos componentes y listeners
+        initComponents()
+        initListeners()
 
-        //Buscamos e inicializamos los recyclers
-     rvPets = findViewById(R.id.rvPets)
+
 
         //Montamos el recycler de pets
-      petsAdapter = PetsAdapter(petsInit)
+        petsAdapter = PetsAdapter(petsInit)
           rvPets.layoutManager = LinearLayoutManager(this)
           rvPets.adapter=petsAdapter
 
@@ -99,31 +106,86 @@ class MainActivity : AppCompatActivity() {
 */
 
 
-        btnComer = findViewById(R.id.btnComer)
+    }
 
+    private fun initComponents(){
+        //Buscamos e inicializamos los recyclers
+        rvPets = findViewById(R.id.rvPets)
+        dog=findViewById(R.id.dog)
+        cat=findViewById(R.id.cat)
+        btnComer = findViewById(R.id.btnComer)
+        btnEdad = findViewById(R.id.btnEdad)
+        txtNoSelected=findViewById(R.id.txtAnimalNoSelected)
+
+    }
+    private fun initListeners(){
         //ingreso al formulario
         btnComer.setOnClickListener{
+
             //val imc:Double = calcularIMC()
             val intent = Intent(this,cuantoComer::class.java)
-            // intent.putExtra("IMC",imc)
-            startActivity(intent)
+
+            if(animalSelected=="dog" || animalSelected=="cat"){
+                intent.putExtra("animalSelected",animalSelected)
+                startActivity(intent)
+
+            }else{
+                txtNoSelected.setVisibility(View.VISIBLE)
+            }
         }
-
-
-
-        btnEdad = findViewById(R.id.btnEdad)
-
         //ingreso al formulario
         btnEdad.setOnClickListener{
             //val imc:Double = calcularIMC()
-            val intent = Intent(this,calculaEdad::class.java)
-            // intent.putExtra("IMC",imc)
-            startActivity(intent)
+            val intent = Intent(this,resultado::class.java)
+
+            if(animalSelected=="dog" || animalSelected=="cat") {
+                intent.putExtra("animalSelected",animalSelected)
+                startActivity(intent)
+
+            }
+            else {
+                txtNoSelected.setVisibility(View.VISIBLE)
+            }
+
+        }
+
+        dog.setOnClickListener {
+        cambiaAnimalSeleccionado("dog")
+            val intentComida = Intent(this,cuantoComer::class.java)
+            val intentIMC = Intent(this,resultado::class.java)
+            intent.putExtra("animalSelected","dog")
+            txtNoSelected.setVisibility(View.GONE)
+
+        }
+        cat.setOnClickListener {
+            cambiaAnimalSeleccionado("cat")
+            val intentComida = Intent(this,cuantoComer::class.java)
+
+            txtNoSelected.setVisibility(View.GONE)
+
         }
 
 
-
-
-
     }
+
+    private fun cambiaAnimalSeleccionado(animal:String) {
+        animalSelected=animal
+        when (animal) {
+            "dog" -> {
+                animalSelected="dog"
+                dog.setBackgroundResource(R.drawable.border)
+                cat.setBackgroundColor(ContextCompat.getColor(this, R.color.animalNoSelected))
+            }
+            "cat" -> {
+                animalSelected="cat"
+                dog.setBackgroundColor(ContextCompat.getColor(this, R.color.animalNoSelected))
+                cat.setBackgroundResource(R.drawable.border)
+            }
+            else -> {
+                dog.setBackgroundColor(ContextCompat.getColor(this, R.color.animalNoSelected))
+                cat.setBackgroundColor(ContextCompat.getColor(this, R.color.animalNoSelected))
+            }
+        }
+    }
+
 }

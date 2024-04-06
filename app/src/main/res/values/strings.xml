@@ -1,11 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">clinicapets</string>
     <string name="description">clinicapets</string>
 
-    <string name="opcion1">Perros de raza mini y toy</string>
-    <string name="opcion2">Perros de raza pequeña</string>
-    <string name="opcion3">Perros de raza mediana</string>
-    <string name="opcion4">Perros de raza grandes</string>
-    <string name="opcion5">Perros de raza gigantes</string>
+    <string name="strPerroMini">Perro de raza mini y toy</string>
+    <string name="strPerroPequenyo">Perro de raza pequeña</string>
+    <string name="strPerroMediano">Perro de raza mediana</string>
+    <string name="strPerroGrande">Perro de raza grande</string>
+    <string name="strGatoMini">Gato de raza grandes</string>
+    <string name="strGatoPequenyo">Gato de raza pequeña</string>
+    <string name="strGatoMediano">Gato de raza mediana</string>
+    <string name="strGatoGrande">Gato de raza grande</string>
+    <string name="strBtnComer">Calcular alimento</string>
+    <string name="strBtnEdad">Calcular edad</string>
+    <string name="strAnimal">Selecciona el animal</string>
+    <string name="strEdad">Edad: 0 años</string>
+    <string name="strNoAnimal">Tienes que seleccionar el animal</string>
+    <string name="strComerGato">¿Qué cantidad de alimento le debes dar al día a tu gato?</string>
+    <string name="strComerPerro">¿Qué cantidad de alimento le debes dar al día a tu perro?</string>
+    <string name="strTamanyo">Tamaño</string>
+    <string name="strErrorTamanyo">*Tienes que seleccionar el tamaño</string>
+    <string name="strErrorEdad">*Tienes que seleccionar la edad</string>
+    <string name="strErrorNombre">*Tienes que introducir el nombre de la mascota</string>
 
 </resources>
