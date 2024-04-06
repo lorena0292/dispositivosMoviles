@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -9,49 +10,97 @@
     android:paddingVertical="32dp"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:id="@+id/dcLayout"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="top"
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_marginStart="80dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/miOpcion"
+        >
+<TextView
+
+    android:id="@+id/sex"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="@string/strAnimal"
+    android:textAllCaps="true"
+    android:layout_gravity="top|center"
+    android:textStyle="bold"
+
+    />
     <!-- Imagen -->
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="4dp"
+        android:id="@+id/dog"
+        android:layout_gravity="center|start"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:contentDescription="@string/description"
         android:scaleType="centerCrop"
-        android:src="@drawable/pet_logo"
-        app:layout_constraintDimensionRatio="0:9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:src="@drawable/dog"
+        android:tint="@color/blue"
+        android:padding="10dp"
+        tools:ignore="UseAppTint"
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        />
+    <ImageView
+        android:id="@+id/cat"
+        android:layout_gravity="center|end"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/cat"
+        android:tint="@color/blue"
+        android:padding="10dp"
+        tools:ignore="UseAppTint" />
+
+        <TextView
+
+            android:id="@+id/txtAnimalNoSelected"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/strNoAnimal"
+            android:textAllCaps="false"
+            android:layout_gravity="bottom|center"
+            android:textColor="@color/red"
+            android:visibility="gone"
+
+            />
+</FrameLayout>
+
+
+    <!-- Lista -->
+    <LinearLayout
         android:id="@+id/miOpcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
-
-        android:padding="16dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dcLayout"
+        android:gravity="center">
+>
 
         <Button
             android:id="@+id/btnComer"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:text="Cuanto comer segun el peso y raza" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button"
+            android:gravity="center_vertical"
+            android:padding="20dp"
+            android:text="@string/strBtnComer"
+             />
 
-        <Button
-            android:id="@+id/btnEdad"
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:text="Calcular edad de mascota" />
+
     </LinearLayout>
 
-    <!-- Lista -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPets"
         android:layout_width="0dp"
@@ -62,5 +111,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/miOpcion"
         app:layout_constraintBottom_toBottomOf="parent"/>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

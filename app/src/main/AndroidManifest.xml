@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".calculaEdad"
+            android:name=".resultado"
             android:exported="false" />
         <activity
             android:name=".cuantoComer"
