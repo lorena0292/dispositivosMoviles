@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="32dp"
+    tools:context=".resultado">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvAnimal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cvResultado"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="16dp"
+        android:layout_marginEnd="16dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/datosAnimalSelected"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtNombreAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="@string/strNombreAnimal"
+             android:layout_marginTop="10dp"
+                android:textAlignment="center"
+                android:textSize="40dp"
+                android:textAllCaps="true"
+                />
+
+            <ImageView
+                android:id="@+id/logoAnimal"
+                android:layout_gravity="center"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/cat"
+                android:padding="10dp"
+                android:layout_marginBottom="20dp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+
+<!--PESO-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvTamanyo"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cvEdad"
+        app:layout_constraintTop_toBottomOf="@id/cvAnimal"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="16dp"
+      >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTamanyo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:text="Tamaño:"
+                android:textAlignment="center"
+                android:textSize="30dp"
+                android:layout_margin="10dp"
+               />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!--EDAD-->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvEdad"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="16dp"
+
+        app:layout_constraintStart_toEndOf="@id/cvTamanyo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvAnimal">
+        <TextView
+            android:id="@+id/txtEdad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/strEdad"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:textSize="30dp"
+            android:layout_margin="10dp"
+            />
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvResultado"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cvEdad"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="16dp">
+
+        <TextView
+            android:id="@+id/txtResultado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="@string/strComer"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

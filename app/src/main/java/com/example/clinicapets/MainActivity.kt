@@ -35,10 +35,9 @@ class MainActivity : AppCompatActivity() {
     private val DELAY:Long = 1500L
 
     private lateinit var btnComer: Button
-    private lateinit var btnEdad: Button
     private lateinit var dog:ImageView
     private lateinit var cat:ImageView
-    private lateinit var animalSelected: String
+    private var animalSelected: String=""
     private lateinit var txtNoSelected:TextView
 
 
@@ -92,9 +91,6 @@ class MainActivity : AppCompatActivity() {
             petsAdapter.notifyDataSetChanged()
         }
 
-
-
-
 /*
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -114,15 +110,12 @@ class MainActivity : AppCompatActivity() {
         dog=findViewById(R.id.dog)
         cat=findViewById(R.id.cat)
         btnComer = findViewById(R.id.btnComer)
-        btnEdad = findViewById(R.id.btnEdad)
         txtNoSelected=findViewById(R.id.txtAnimalNoSelected)
 
     }
     private fun initListeners(){
         //ingreso al formulario
         btnComer.setOnClickListener{
-
-            //val imc:Double = calcularIMC()
             val intent = Intent(this,cuantoComer::class.java)
 
             if(animalSelected=="dog" || animalSelected=="cat"){
@@ -133,21 +126,7 @@ class MainActivity : AppCompatActivity() {
                 txtNoSelected.setVisibility(View.VISIBLE)
             }
         }
-        //ingreso al formulario
-        btnEdad.setOnClickListener{
-            //val imc:Double = calcularIMC()
-            val intent = Intent(this,resultado::class.java)
 
-            if(animalSelected=="dog" || animalSelected=="cat") {
-                intent.putExtra("animalSelected",animalSelected)
-                startActivity(intent)
-
-            }
-            else {
-                txtNoSelected.setVisibility(View.VISIBLE)
-            }
-
-        }
 
         dog.setOnClickListener {
         cambiaAnimalSeleccionado("dog")
@@ -164,7 +143,6 @@ class MainActivity : AppCompatActivity() {
             txtNoSelected.setVisibility(View.GONE)
 
         }
-
 
     }
 

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RadioButton
@@ -17,6 +18,9 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.slider.RangeSlider
+import com.google.android.material.slider.Slider
+import java.util.logging.Logger
+import kotlin.math.log
 import kotlin.properties.Delegates
 
 
@@ -29,14 +33,16 @@ class cuantoComer : AppCompatActivity() {
     lateinit var rbMediano:RadioButton
     lateinit var rbGrande:RadioButton
     lateinit var txtNombre:TextView
-    lateinit var txtEdad:TextView
+    lateinit var textErrorNombre:TextView
+    lateinit var textErrorTamanyo:TextView
+    lateinit var textEdad:TextView
     lateinit var rsEdad:RangeSlider
-    var animalSelected:String?=null
+    private var animalSelected:String?=null
 
 
-    lateinit var nombre:String
-    var edad by Delegates.notNull<Int>()
-    var tamanyo by Delegates.notNull<Int>()
+    private var nombre:String?=null
+    private var edad:Int=0
+    private var tamanyo:Int= 0
 
 
     private lateinit var button: Button
@@ -53,19 +59,13 @@ class cuantoComer : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-
-
-        }
-
+            }
         //Obtain animal from main_activity
         val paquete: Bundle? = intent.extras
         animalSelected = paquete?.getString("animalSelected")
 
-        initComponents()
-
 
         when (animalSelected) {
-
         "dog"-> {
             this.txtAnimalSelected.text= getString(R.string.strComerPerro)
            imgAnimalSelected.setImageResource(R.drawable.dog)
@@ -76,20 +76,16 @@ class cuantoComer : AppCompatActivity() {
             rbGrande.text=getString(R.string.strPerroGrande)
         }
         "cat"->{
-            this.txtAnimalSelected.text= getString(R.string.strComerGato)
+            txtAnimalSelected.text= getString(R.string.strComerGato)
             imgAnimalSelected.setImageResource(R.drawable.cat)
             rbMini.text = getString(R.string.strGatoMini)
             rbPequenyo.text = getString(R.string.strGatoPequenyo)
             rbMediano.text = getString(R.string.strGatoMediano)
             rbGrande.text = getString(R.string.strGatoGrande)
         }
+
     }
-
-
-
-
-
-
+        initListeners()
 
     }
     private fun initComponents(){
@@ -110,26 +106,28 @@ class cuantoComer : AppCompatActivity() {
         rbPequenyo= findViewById(R.id.rbPequenyo)
         rbMediano= findViewById(R.id.rbMediano)
         rbGrande= findViewById(R.id.rbGrande)
-        txtEdad=findViewById(R.id.textEdad)
+        rsEdad=findViewById(R.id.rngEdad)
+        textEdad=findViewById(R.id.textEdad)
+        textEdad.text="Edad: ${edad.toString()} años"
+        txtNombre=findViewById(R.id.txtNombrePet)
+        textErrorNombre=findViewById(R.id.textErrorNombre)
+        textErrorTamanyo=findViewById(R.id.textErrorTamanyo)
     }
 
-    private fun comprobarCampos():Boolean{
-        return true
-    }
+
     private fun initListeners(){
-        // when Submit button is clicked
+        // Button Calcular Listener
         button.setOnClickListener {
 
             val intent = Intent(this,resultado::class.java)
 
+            // Displaying text of the checked radio button in the form of toast
+         //   Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
 
+            nombre=txtNombre.text.toString()
 
             // Displaying text of the checked radio button in the form of toast
-            Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
-
-            txtNombre=findViewById(R.id.txtNombrePet)
-            rsEdad=findViewById(R.id.txtNombrePet)
-
+          //  Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
 
             if(comprobarCampos()){
                 intent.putExtra("animalSelected",animalSelected)
@@ -139,12 +137,63 @@ class cuantoComer : AppCompatActivity() {
 
                 startActivity(intent)
             }
+
         }
 
-
-        rsEdad.addOnChangeListener { rangeSlider, value, fromUser ->
+        //RangeSlider Edad Listener
+        rsEdad.addOnChangeListener{slider, value, fromUser ->
             edad=value.toInt()
-            txtEdad.text="Edad: {$edad.toString()} años"
+            if(edad==0){
+                textEdad.text = "Edad: Menos de 1 año"
+            }
+            else {
+                textEdad.text = "Edad: ${edad.toString()} años"
+            }
         }
+
+
+        radioGroup?.setOnCheckedChangeListener { group, checkedId ->
+
+            textErrorTamanyo.setVisibility(View.GONE)
+            when(checkedId){
+                R.id.rbMini-> {
+                    tamanyo = 0
+                }
+                R.id.rbPequenyo-> {
+                    tamanyo = 1
+                }
+                R.id.rbMediano-> {
+                    tamanyo = 2
+                }
+                R.id.rbGrande-> {
+                    tamanyo = 3
+                }
+            }
+
+
+
+        }
+
+
+
+    }
+    private fun comprobarCampos():Boolean{
+
+        if (txtNombre.text.toString().isEmpty()){
+            textErrorNombre.setVisibility(View.VISIBLE)
+            return false
+        }
+        else{
+            textErrorNombre.setVisibility(View.GONE)
+        }
+
+        if (tamanyo==0){
+            textErrorTamanyo.setVisibility(View.VISIBLE)
+            return false
+        }
+        else{
+            textErrorTamanyo.setVisibility(View.GONE)
+        }
+        return true
     }
 }

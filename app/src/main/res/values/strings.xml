@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">clinicapets</string>
     <string name="description">clinicapets</string>
-
+    <string name="strNombre">Nombre</string>
     <string name="strPerroMini">Perro de raza mini y toy</string>
     <string name="strPerroPequenyo">Perro de raza pequeña</string>
     <string name="strPerroMediano">Perro de raza mediana</string>
@@ -14,13 +14,15 @@
     <string name="strBtnComer">Calcular alimento</string>
     <string name="strBtnEdad">Calcular edad</string>
     <string name="strAnimal">Selecciona el animal</string>
-    <string name="strEdad">Edad: 0 años</string>
-    <string name="strNoAnimal">Tienes que seleccionar el animal</string>
+    <string name="strEdad">Edad: Menos de 1 año</string>
+    <string name="strNoAnimal">*Tienes que seleccionar el animal</string>
     <string name="strComerGato">¿Qué cantidad de alimento le debes dar al día a tu gato?</string>
     <string name="strComerPerro">¿Qué cantidad de alimento le debes dar al día a tu perro?</string>
     <string name="strTamanyo">Tamaño</string>
     <string name="strErrorTamanyo">*Tienes que seleccionar el tamaño</string>
     <string name="strErrorEdad">*Tienes que seleccionar la edad</string>
     <string name="strErrorNombre">*Tienes que introducir el nombre de la mascota</string>
-
+    <string name="strResultado">El animal:  de nombre:  edad:  y tamaño:  </string>
+    <string name="strNombreAnimal">Danna</string>
+    <string name="strComer">Debería comer una cantidad diaria de:  </string>
 </resources>
