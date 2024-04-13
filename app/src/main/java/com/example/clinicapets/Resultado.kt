@@ -7,17 +7,17 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.clinicapets.models.tamanyoAnimal
 
-class resultado : AppCompatActivity() {
+//Esta clase obtiene el tipo de animal, nombre, edad y tamaño y calcula la cantidad e alimento diario
+class Resultado : AppCompatActivity() {
 
     private var animalSelected:String?=null
     private lateinit var imgAnimalSelected: ImageView
     private var nombre: String? = null
     private var edad: Int? = 0
-    private var tamanyo: Int? = 0
-    private lateinit var tipoTamanyo : tamanyoAnimal
-    private var kilosComida = intArrayOf(0, 0)
+    private var tamanyo: Int = 0
+    private lateinit var tipoTamanyo : TamanyoAnimal
+    private var gramosComida = intArrayOf(0, 0)
 
     private lateinit var txtResultado: TextView
     private lateinit var txtNombre: TextView
@@ -40,7 +40,7 @@ class resultado : AppCompatActivity() {
         animalSelected = paquete?.getString("animalSelected")
         nombre = paquete?.getString("nombre")
         edad = paquete?.getInt("edad")
-        tamanyo = paquete?.getInt("tamanyo")
+        tamanyo = paquete?.getInt("tamanyo")!!
 
         initComponents()
 
@@ -48,8 +48,13 @@ class resultado : AppCompatActivity() {
 
     fun initComponents() {
 
-        //update kilos
-        kilosComida()
+        //update gramos
+        gramosComida()
+        //si es un gato son 10 gramos menos
+        if(animalSelected=="cat"){
+            gramosComida[0]-=10
+            gramosComida[1]-=10
+        }
         //update tamanyo
 
 
@@ -63,7 +68,7 @@ class resultado : AppCompatActivity() {
         txtNombre.text = nombre
         txtEdad.text = "Edad:\n ${edad} años"
         txtTamanyo.text = "Tamaño: ${tipoTamanyo}"
-        txtResultado.text = "Debería de comer entre ${kilosComida[0]} y ${kilosComida[1]} kilos diarios"
+        txtResultado.text = "Debería de comer entre ${gramosComida[0]} y ${gramosComida[1]} gramos diarios"
     }
 
     fun cambiarLogo(){
@@ -87,67 +92,71 @@ class resultado : AppCompatActivity() {
         when(tamanyo){
 
             0->{
-               tipoTamanyo=tamanyoAnimal.MINI
+               tipoTamanyo= TamanyoAnimal.MINI
             }
             1->{
-                tipoTamanyo=tamanyoAnimal.PEQUEÑO
+                tipoTamanyo= TamanyoAnimal.PEQUEÑO
             }
             2->{
-                tipoTamanyo=tamanyoAnimal.MEDIANO
+                tipoTamanyo= TamanyoAnimal.MEDIANO
             }
             3->{
-                tipoTamanyo=tamanyoAnimal.GRANDE
+                tipoTamanyo= TamanyoAnimal.GRANDE
             }
 
 
         }
     }
-    fun kilosComida() {
+
+    fun getTamanyo():Int{
+        return tamanyo
+    }
+    fun gramosComida() {
         if (edad!! > 1) {
             when (tamanyo) {
                 0 -> {
-                    kilosComida[0] = 50
-                    kilosComida[1] = 90
+                    gramosComida[0] = 50
+                    gramosComida[1] = 90
                 }
 
                 1 -> {
-                    kilosComida[0] = 90
-                    kilosComida[1] = 190
+                    gramosComida[0] = 90
+                    gramosComida[1] = 190
 
                 }
 
                 2 -> {
-                    kilosComida[0] = 190
-                    kilosComida[1] = 310
+                    gramosComida[0] = 190
+                    gramosComida[1] = 310
                 }
 
                 3 -> {
-                    kilosComida[0] = 500
-                    kilosComida[1] = 590
+                    gramosComida[0] = 500
+                    gramosComida[1] = 590
                 }
             }
 
         } else {
             when (tamanyo) {
                 0 -> {
-                    kilosComida[0] = 10
-                    kilosComida[1] = 30
+                    gramosComida[0] = 10
+                    gramosComida[1] = 30
                 }
 
                 1 -> {
-                    kilosComida[0] = 30
-                    kilosComida[1] = 70
+                    gramosComida[0] = 30
+                    gramosComida[1] = 70
 
                 }
 
                 2 -> {
-                    kilosComida[0] = 70
-                    kilosComida[1] = 120
+                    gramosComida[0] = 70
+                    gramosComida[1] = 120
                 }
 
                 3 -> {
-                    kilosComida[0] = 120
-                    kilosComida[1] = 300
+                    gramosComida[0] = 120
+                    gramosComida[1] = 300
                 }
             }
         }

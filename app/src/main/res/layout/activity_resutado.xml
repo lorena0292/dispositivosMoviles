@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="16dp"
     android:paddingVertical="32dp"
-    tools:context=".resultado">
+    tools:context=".Resultado">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvAnimal"

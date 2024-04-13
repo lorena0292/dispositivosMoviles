@@ -1,9 +1,7 @@
 package com.example.clinicapets
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -16,15 +14,10 @@ import androidx.core.view.WindowInsetsCompat
 
 import android.widget.RadioGroup
 import android.widget.TextView
-import android.widget.Toast
 import com.google.android.material.slider.RangeSlider
-import com.google.android.material.slider.Slider
-import java.util.logging.Logger
-import kotlin.math.log
-import kotlin.properties.Delegates
 
-
-class cuantoComer : AppCompatActivity() {
+//Clase que recibe el animal seleccionado y obtiene el nombre, la edad y el tamaño del animal y se lo envia a la clase Resultado
+class CuantoComer : AppCompatActivity() {
 
     var radioGroup: RadioGroup? = null
     lateinit var radioButton: RadioButton
@@ -42,7 +35,7 @@ class cuantoComer : AppCompatActivity() {
 
     private var nombre:String?=null
     private var edad:Int=0
-    private var tamanyo:Int= 0
+    private var tamanyo:Int= -1
 
 
     private lateinit var button: Button
@@ -61,8 +54,7 @@ class cuantoComer : AppCompatActivity() {
             insets
             }
         //Obtain animal from main_activity
-        val paquete: Bundle? = intent.extras
-        animalSelected = paquete?.getString("animalSelected")
+        animalSelected=getAnimalSeleccionado()
 
 
         when (animalSelected) {
@@ -109,6 +101,13 @@ class cuantoComer : AppCompatActivity() {
         rsEdad=findViewById(R.id.rngEdad)
         textEdad=findViewById(R.id.textEdad)
         textEdad.text="Edad: ${edad.toString()} años"
+
+        if(edad==0){
+            textEdad.text = "Edad: Menos de 1 año"
+        }
+        else {
+            textEdad.text = "Edad: ${edad.toString()} años"
+        }
         txtNombre=findViewById(R.id.txtNombrePet)
         textErrorNombre=findViewById(R.id.textErrorNombre)
         textErrorTamanyo=findViewById(R.id.textErrorTamanyo)
@@ -119,7 +118,7 @@ class cuantoComer : AppCompatActivity() {
         // Button Calcular Listener
         button.setOnClickListener {
 
-            val intent = Intent(this,resultado::class.java)
+            val intent = Intent(this, Resultado::class.java)
 
             // Displaying text of the checked radio button in the form of toast
          //   Toast.makeText(baseContext, radioButton.text, Toast.LENGTH_SHORT).show()
@@ -155,17 +154,18 @@ class cuantoComer : AppCompatActivity() {
         radioGroup?.setOnCheckedChangeListener { group, checkedId ->
 
             textErrorTamanyo.setVisibility(View.GONE)
+
             when(checkedId){
-                R.id.rbMini-> {
+                R.id.rbMini -> {
                     tamanyo = 0
                 }
-                R.id.rbPequenyo-> {
+                R.id.rbPequenyo -> {
                     tamanyo = 1
                 }
-                R.id.rbMediano-> {
+                R.id.rbMediano -> {
                     tamanyo = 2
                 }
-                R.id.rbGrande-> {
+                R.id.rbGrande -> {
                     tamanyo = 3
                 }
             }
@@ -177,17 +177,19 @@ class cuantoComer : AppCompatActivity() {
 
 
     }
+    
+    //Comprobamos que se ha escritoo el nombre de la mascota y se ha seleccionado el tamaño del animal
     private fun comprobarCampos():Boolean{
 
         if (txtNombre.text.toString().isEmpty()){
             textErrorNombre.setVisibility(View.VISIBLE)
             return false
         }
-        else{
+        else if(!(txtNombre.text.toString().isEmpty())) {
             textErrorNombre.setVisibility(View.GONE)
         }
 
-        if (tamanyo==0){
+       if (tamanyo==-1){
             textErrorTamanyo.setVisibility(View.VISIBLE)
             return false
         }
@@ -196,4 +198,11 @@ class cuantoComer : AppCompatActivity() {
         }
         return true
     }
+
+    fun getAnimalSeleccionado():String?{
+        val paquete: Bundle? = intent.extras
+        return paquete?.getString("animalSelected")
+
+    }
+
 }
