@@ -21,14 +21,11 @@ import com.example.clinicapets.adapters.PetsAdapter
 import com.example.clinicapets.service.RetrofitServiceFactory
 import kotlinx.coroutines.launch
 
+
+//Esta clase obtiene el animal seleccionado y se lo envia a la clase CuantoComer
 class MainActivity : AppCompatActivity() {
 
-   /* private val petsInit= listOf (
-       // Pet("benji", SpeciePets.GATO, false),
-       // Pet("benji", SpeciePets.PERRO, false)
-        PetResponseItem("benji","perro"),
-        PetResponseItem("kali","gat")
-       )*/
+
 
     //Splash time
     private var splashScreenStays :Boolean = true
@@ -75,7 +72,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
         //Montamos el servicio para lanzar la petición contra el API
         val apiPets = RetrofitServiceFactory.getPetsRetrofit()
 
@@ -116,7 +112,7 @@ class MainActivity : AppCompatActivity() {
     private fun initListeners(){
         //ingreso al formulario
         btnComer.setOnClickListener{
-            val intent = Intent(this,cuantoComer::class.java)
+            val intent = Intent(this, CuantoComer::class.java)
 
             if(animalSelected=="dog" || animalSelected=="cat"){
                 intent.putExtra("animalSelected",animalSelected)
@@ -130,15 +126,15 @@ class MainActivity : AppCompatActivity() {
 
         dog.setOnClickListener {
         cambiaAnimalSeleccionado("dog")
-            val intentComida = Intent(this,cuantoComer::class.java)
-            val intentIMC = Intent(this,resultado::class.java)
+            val intentComida = Intent(this, CuantoComer::class.java)
+            val intentIMC = Intent(this, Resultado::class.java)
             intent.putExtra("animalSelected","dog")
             txtNoSelected.setVisibility(View.GONE)
 
         }
         cat.setOnClickListener {
             cambiaAnimalSeleccionado("cat")
-            val intentComida = Intent(this,cuantoComer::class.java)
+            val intentComida = Intent(this, CuantoComer::class.java)
 
             txtNoSelected.setVisibility(View.GONE)
 
